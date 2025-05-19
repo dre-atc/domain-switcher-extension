@@ -1,0 +1,26 @@
+{
+  "name": "domain-switcher",
+  "description": "A Chrome extension to switch between different domains easily.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "switcher.html",
+    "default_icon": "images/switcher_icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "http://localhost:5173/*",
+    "https://www-dev.wwt.com/*",
+    "https://www-test.wwt.com/*",
+    "https://www.wwt.com/*",
+    "https://custom-editor.apps-dev.wwt.com/*",
+    "https://custom-editor.apps-tst.wwt.com/*",
+    "https://custom-editor.apps.wwt.com/*",
+    "<all_urls>"
+  ]
+}
