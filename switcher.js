@@ -36,10 +36,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       // Create the new URL with the same protocol, path, search params, etc.
       const newUrl = new URL(currentUrl);
       
-      // Replace the hostname with the new domain
-      // Remove 'http://' or 'https://' if the user included it
-      const cleanDomain = newDomain.replace(/^(https?:\/\/)/, '');
-      newUrl.hostname = cleanDomain;
+      // Determine if the user specified a protocol (http:// or https://)
+      const hasProtocol = /^(https?:\/\/)/i.test(newDomain);
+
+      // Build a full URL string that the URL constructor can parse
+      const urlToParse = hasProtocol ? newDomain : `http://${newDomain}`;
+      const parsedDomain = new URL(urlToParse);
+
+      // Apply the parsed protocol, hostname, and port
+      newUrl.protocol = parsedDomain.protocol;
+      newUrl.hostname = parsedDomain.hostname;
+      // If the new domain contains a custom port, use it, otherwise clear any existing port
+      newUrl.port = parsedDomain.port || '';
       
       // Navigate to the new URL
       await chrome.tabs.update(activeTab.id, { url: newUrl.toString() });
@@ -71,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // If no domain in input field, try to save current tab's domain
         const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
         const tabUrl = new URL(activeTab.url);
-        const tabDomain = tabUrl.hostname;
+        const tabDomain = tabUrl.hostname + (tabUrl.port ? `:${tabUrl.port}` : '');
         
         // Check if domain already exists
         if (!savedDomains.includes(tabDomain)) {

@@ -13,7 +13,7 @@ A Chrome extension that allows you to quickly switch between different domains w
 
 This extension makes it easy to navigate between different environments (development, testing, production) or simply switch between different domains while staying on the same page path.
 
-For example, if you're on `https://www.example.com/products?id=123` and switch to `newdomain.com`, you'll be taken to `https://newdomain.com/products?id=123`.
+For example, if you're on `https://www.example.com/products?id=123` and switch to `newdomain.com`, you'll be taken to `https://newdomain.com/products?id=123`. You can also switch to local development environments by entering domains with ports like `localhost:3000`.
 
 ## Installation
 
@@ -44,7 +44,7 @@ Since this extension is not published on the Chrome Web Store, you need to insta
 
 1. **Basic Domain Switching**
    - Click on the extension icon in your toolbar
-   - Enter the new domain in the input field (e.g., "example.com")
+   - Enter the new domain in the input field (e.g., "example.com" or "localhost:3000")
    - Press Enter to switch to that domain while keeping the same path
 
 2. **Saving Domains for Quick Access**
